@@ -6,6 +6,7 @@ public class ShoppingListManager implements Shopping {
 
     String addToCategory = "";
     double shoppingBudget = 0;
+    int choice = 0;
 
     // decimal format
     DecimalFormat df = new DecimalFormat("##.##");
@@ -22,20 +23,58 @@ public class ShoppingListManager implements Shopping {
         this.categories = new ArrayList<>();
     }
 
-    @Override
-    public void addItem() {
+    void menu(){
+        System.out.println("(1) Add item");
+        System.out.println("(2) Update item");
+        System.out.println("(3) Remove item");
+        System.out.println("(4) View all item(s)");
+        System.out.println("(5) View all categories");
+
+        System.out.print("enter choice: ");
+        choice = scanner.nextInt();
+    }
+
+    void userJourney() {
+        // branding
+        shopNBud();
+
         // users budget
         System.out.print("enter budget amount: $");
         shoppingBudget = scanner.nextDouble();
         scanner.nextLine();
 
+        // user menu
+        menu();
+
+        boolean running = true;
+
+        while (running) {
+            switch (choice) {
+                case 1 -> addItem();
+                case 2 -> updateItem();
+                case 3 -> removeItem();
+                case 4 -> viewAllItems();
+                //case 5 -> viewAllCategories();
+                case 9 -> {
+                    System.out.println("exiting program");
+                    running = false;
+                }
+                default -> System.out.println("invalid choice");
+            }
+        }
+    }
+
+    @Override
+    public void addItem() {
         // item name
         System.out.print("enter item name: ");
         item.setItemName(scanner.nextLine());
+        scanner.nextLine();
 
         // item price
         System.out.print("enter item price: $");
         item.setItemPrice(scanner.nextDouble());
+        scanner.nextLine();
 
         // item qty
         System.out.print("enter item quantity: ");
@@ -59,19 +98,16 @@ public class ShoppingListManager implements Shopping {
 
             if (addToCategory.equalsIgnoreCase("y") || addToCategory.equalsIgnoreCase("yes")) {
                 items.add(new Item(item.getItemName(), item.getItemPrice(), item.getItemQuantity()));
-                System.out.println("- - - - - - - - - - - -");
                 System.out.println(item.getItemName() + " has been added");
-                System.out.println("- - - - - - - - - - - -");
 
                 // add item to category
                 System.out.print("enter item category: ");
                 item.setItemCategory(scanner.nextLine());
                 categories.add(new Item(item.getItemCategory()));
-                System.out.println("- - - - - - - - - - - -");
                 System.out.println(item.getItemName() + " has been added to your " + item.getItemCategory() + "'s list");
-                System.out.println("- - - - - - - - - - - -");
             } else if (addToCategory.equalsIgnoreCase("n") || addToCategory.equalsIgnoreCase("no")) {
                 items.add(new Item(item.getItemName(), item.getItemPrice(), item.getItemQuantity()));
+                System.out.println(item.getItemName() + " has been added to your " + item.getItemCategory() + "'s list");
             } else {
                 System.out.println("invalid entry");
             }
@@ -79,32 +115,20 @@ public class ShoppingListManager implements Shopping {
     }
 
     @Override
-    public void removeItem(int index, Item item) {
-        if (index < 0 || index > items.size()){
-            System.out.println("❌ no item found");
-        }
-
-        for (Item i : items){
-            if (i == items.get(index)){
-                items.remove(item);
-                System.out.println(item + " has been removed");
-            }
-        }
+    public void removeItem() {
     }
 
     @Override
-    public void updateItem(int index, Item newItem) {
-        if (index < 0 || index > items.size()) {
-            System.out.println("❌ no item found to update");
-        }
+    public void updateItem() {
 
-        for (int i = 0; i < items.size(); i++) {
-             items.set(index,newItem);
-            System.out.println("✅ " + newItem + " has been updated.");
-        }
     }
 
-    @Override
+    void shopNBud(){
+        System.out.println("---------- ⭐️----------");
+        System.out.println(" S H O P ' N  🤖 B U D  ");
+        System.out.println("---------- 🛒----------");
+    }
+
     public void viewAllItems() {
         for (Item item : items){
             item.displayItem();

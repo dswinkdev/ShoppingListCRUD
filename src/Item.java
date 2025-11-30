@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public class Item {
 
     private String itemName;
@@ -12,6 +14,9 @@ public class Item {
         this.itemPrice = itemPrice;
         this.itemQuantity = itemQuantity;
     }
+
+    // decimal format
+    DecimalFormat df = new DecimalFormat("##.##");
 
     public Item(String itemCategory){
         this.itemCategory = itemCategory;
@@ -52,9 +57,9 @@ public class Item {
     void displayItem(){
         System.out.println("- - - - - - - - - - - -");
         System.out.println("item -> " + itemName);
-        System.out.println("price -> $" + itemPrice);
+        System.out.println("price -> $" + df.format(itemPrice));
         System.out.println("qty -> " + itemQuantity);
-        System.out.println("est. total -> $" + (itemPrice * itemQuantity));
+        System.out.println("est. total -> $" + df.format((itemPrice) * itemQuantity));
     }
     void displayCategory(){
         System.out.println("category -> " + itemCategory);
