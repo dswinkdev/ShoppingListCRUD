@@ -7,6 +7,7 @@ public class ShoppingListManager implements Shopping {
     String addToCategory = "";
     double shoppingBudget = 0;
     int choice = 0;
+    int itemCount = 0;
 
     // decimal format
     DecimalFormat df = new DecimalFormat("##.##");
@@ -68,13 +69,13 @@ public class ShoppingListManager implements Shopping {
     public void addItem() {
         // item name
         System.out.print("enter item name: ");
-        item.setItemName(scanner.nextLine());
+        String itemName = scanner.next();
+        item.setItemName(itemName);
         scanner.nextLine();
 
         // item price
         System.out.print("enter item price: $");
         item.setItemPrice(scanner.nextDouble());
-        scanner.nextLine();
 
         // item qty
         System.out.print("enter item quantity: ");
@@ -88,6 +89,10 @@ public class ShoppingListManager implements Shopping {
         } else {
             shoppingBudget = shoppingBudget - (item.getItemPrice() * item.getItemQuantity());
         }
+
+        // count number of items
+        itemCount++;
+
         // item category (y / n)??
         System.out.print("add this item to category? y/n: ");
         addToCategory = scanner.nextLine();
