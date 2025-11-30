@@ -138,7 +138,7 @@ public class ShoppingListManager implements Shopping {
         for (Item item : items){
             item.displayItem();
         }
-        System.out.println("budget -> +$" + shoppingBudget + " | -$" +
+        System.out.println("budget spend -> +$" + shoppingBudget + " | -$" +
                 (df.format(item.getItemPrice() * item.getItemQuantity())));
         item.displayCategory();
     }
