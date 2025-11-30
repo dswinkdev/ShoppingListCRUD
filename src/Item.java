@@ -5,11 +5,16 @@ public class Item {
     private double itemPrice;
     private int itemQuantity;
 
-    public Item(String itemName, String itemCategory, double itemPrice, int itemQuantity){
+    public Item(){}
+
+    public Item(String itemName, double itemPrice, int itemQuantity){
         this.itemName = itemName;
-        this.itemCategory = itemCategory;
         this.itemPrice = itemPrice;
         this.itemQuantity = itemQuantity;
+    }
+
+    public Item(String itemCategory){
+        this.itemCategory = itemCategory;
     }
 
     public String getItemName() {
@@ -42,5 +47,17 @@ public class Item {
 
     public void setItemQuantity(int itemQuantity) {
         this.itemQuantity = itemQuantity;
+    }
+
+    void displayItem(){
+        System.out.println("- - - - - - - - - - - -");
+        System.out.println("item -> " + itemName);
+        System.out.println("price -> $" + itemPrice);
+        System.out.println("qty -> " + itemQuantity);
+        System.out.println("est. total -> $" + (itemPrice * itemQuantity));
+    }
+    void displayCategory(){
+        System.out.println("category -> " + itemCategory);
+        System.out.println("- - - - - - - - - - - -");
     }
 }

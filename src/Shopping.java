@@ -1,7 +1,7 @@
 public interface Shopping {
 
-    void addItem(ShoppingList item);
-    void removeItem(int index, ShoppingList item);
-    void updateItem(int index, ShoppingList newItem);
+    void addItem();
+    void removeItem(int index, Item item);
+    void updateItem(int index, Item newItem);
     void viewAllItems();
 }
