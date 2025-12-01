@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class ShoppingListManager implements Shopping {
 
     String addToCategory = "";
+    double initialBudget = 0;
     double shoppingBudget = 0;
     int choice = 0;
     int itemCount = 0;
@@ -42,6 +43,7 @@ public class ShoppingListManager implements Shopping {
         // users budget
         System.out.print("enter budget amount: $");
         shoppingBudget = scanner.nextDouble();
+        initialBudget = shoppingBudget;
         scanner.nextLine();
 
         // user menu
@@ -116,8 +118,7 @@ public class ShoppingListManager implements Shopping {
 
         if (addToCategory.equalsIgnoreCase("y") || addToCategory.equalsIgnoreCase("yes")) {
             items.add(new Item(item.getItemName(), item.getItemPrice(), item.getItemQuantity()));
-            System.out.println("- - - - - - - - - - - -");
-            System.out.println(item.getItemName() + " has been added");
+            System.out.println(item.getItemName() + " added");
             System.out.println("- - - - - - - - - - - -");
 
 
@@ -125,10 +126,10 @@ public class ShoppingListManager implements Shopping {
             System.out.print("enter item category: ");
             item.setItemCategory(scanner.nextLine());
             categories.add(new Item(item.getItemCategory()));
-            System.out.println(item.getItemName() + " has been added to your " + item.getItemCategory() + "'s list");
+            // adding item to category unless user enter n / no
+            System.out.println(item.getItemName() + " added to " + item.getItemCategory() + "'s list");
         } else if (addToCategory.equalsIgnoreCase("n") || addToCategory.equalsIgnoreCase("no")) {
             items.add(new Item(item.getItemName(), item.getItemPrice(), item.getItemQuantity()));
-            System.out.println(item.getItemName() + " has been added to your " + item.getItemCategory() + "'s list");
         } else {
             System.out.println("invalid entry");
         }
@@ -159,7 +160,8 @@ public class ShoppingListManager implements Shopping {
     }
 
     void budgetSpend() {
-        System.out.println("budget spend -> +$" + shoppingBudget + " | -$" +
-                (df.format(item.getItemPrice() * item.getItemQuantity())));
+        System.out.println("budget amount: $" + initialBudget);
+        System.out.println("budget spent: -$" + (df.format(item.getItemPrice() * item.getItemQuantity())));
+        System.out.println("budget remaining: +$" + shoppingBudget);
     }
 }
