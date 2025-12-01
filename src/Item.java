@@ -22,6 +22,19 @@ public class Item {
         this.itemCategory = itemCategory;
     }
 
+    void displayItem() {
+        System.out.println("- - - - - - - - - - - -");
+        System.out.println("item -> " + itemName);
+        System.out.println("price -> $" + df.format(itemPrice));
+        System.out.println("qty -> " + itemQuantity);
+        System.out.println("est. total -> $" + df.format((itemPrice) * itemQuantity));
+    }
+
+    void displayCategory() {
+        System.out.println(((itemCategory == null) ? "category -> none" : "category -> " + itemCategory));
+        System.out.println("- - - - - - - - - - - -");
+    }
+
     public String getItemName() {
         return itemName;
     }
@@ -52,18 +65,5 @@ public class Item {
 
     public void setItemQuantity(int itemQuantity) {
         this.itemQuantity = itemQuantity;
-    }
-
-    void displayItem() {
-        System.out.println("- - - - - - - - - - - -");
-        System.out.println("item -> " + itemName);
-        System.out.println("price -> $" + df.format(itemPrice));
-        System.out.println("qty -> " + itemQuantity);
-        System.out.println("est. total -> $" + df.format((itemPrice) * itemQuantity));
-    }
-
-    void displayCategory() {
-        System.out.println(((itemCategory == null) ? "category -> none" : "category -> " + itemCategory));
-        System.out.println("- - - - - - - - - - - -");
     }
 }
