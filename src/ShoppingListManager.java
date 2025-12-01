@@ -19,12 +19,12 @@ public class ShoppingListManager implements Shopping {
 
     Scanner scanner = new Scanner(System.in);
 
-    public ShoppingListManager(){
+    public ShoppingListManager() {
         this.items = new ArrayList<>();
         this.categories = new ArrayList<>();
     }
 
-    void menu(){
+    void menu() {
         System.out.println("(1) Add item");
         System.out.println("(2) Update item");
         System.out.println("(3) Remove item");
@@ -83,19 +83,19 @@ public class ShoppingListManager implements Shopping {
         scanner.nextLine();
 
         // budget calculation
-        if (shoppingBudget < 0 || shoppingBudget < (item.getItemPrice() * item.getItemQuantity())){
+        if (shoppingBudget < 0 || shoppingBudget < (item.getItemPrice() * item.getItemQuantity())) {
             shoppingBudget = 0;
             System.out.println("insufficient budget");
         } else {
-            if (shoppingBudget < 100){
+            if (shoppingBudget < 100) {
                 System.out.println("- - - - - - - - - - - -");
                 System.out.println("FYI: your budget is under $100");
                 System.out.println("- - - - - - - - - - - -");
-            } else if (shoppingBudget < 200){
+            } else if (shoppingBudget < 200) {
                 System.out.println("- - - - - - - - - - - -");
                 System.out.println("FYI: your budget is under $200");
                 System.out.println("- - - - - - - - - - - -");
-            } else if (shoppingBudget < 300){
+            } else if (shoppingBudget < 300) {
                 System.out.println("- - - - - - - - - - - -");
                 System.out.println("FYI: your budget is under $300");
                 System.out.println("- - - - - - - - - - - -");
@@ -110,29 +110,29 @@ public class ShoppingListManager implements Shopping {
         System.out.print("add this item to category? y/n: ");
         addToCategory = scanner.nextLine();
 
-            while (addToCategory.isEmpty()) {
-                System.out.println("you must add a name to category");
-            }
+        while (addToCategory.isEmpty()) {
+            System.out.println("you must add a name to category");
+        }
 
-            if (addToCategory.equalsIgnoreCase("y") || addToCategory.equalsIgnoreCase("yes")) {
-                items.add(new Item(item.getItemName(), item.getItemPrice(), item.getItemQuantity()));
-                System.out.println("- - - - - - - - - - - -");
-                System.out.println(item.getItemName() + " has been added");
-                System.out.println("- - - - - - - - - - - -");
+        if (addToCategory.equalsIgnoreCase("y") || addToCategory.equalsIgnoreCase("yes")) {
+            items.add(new Item(item.getItemName(), item.getItemPrice(), item.getItemQuantity()));
+            System.out.println("- - - - - - - - - - - -");
+            System.out.println(item.getItemName() + " has been added");
+            System.out.println("- - - - - - - - - - - -");
 
 
-                // add item to category
-                System.out.print("enter item category: ");
-                item.setItemCategory(scanner.nextLine());
-                categories.add(new Item(item.getItemCategory()));
-                System.out.println(item.getItemName() + " has been added to your " + item.getItemCategory() + "'s list");
-            } else if (addToCategory.equalsIgnoreCase("n") || addToCategory.equalsIgnoreCase("no")) {
-                items.add(new Item(item.getItemName(), item.getItemPrice(), item.getItemQuantity()));
-                System.out.println(item.getItemName() + " has been added to your " + item.getItemCategory() + "'s list");
-            } else {
-                System.out.println("invalid entry");
-            }
-            viewAllItems();
+            // add item to category
+            System.out.print("enter item category: ");
+            item.setItemCategory(scanner.nextLine());
+            categories.add(new Item(item.getItemCategory()));
+            System.out.println(item.getItemName() + " has been added to your " + item.getItemCategory() + "'s list");
+        } else if (addToCategory.equalsIgnoreCase("n") || addToCategory.equalsIgnoreCase("no")) {
+            items.add(new Item(item.getItemName(), item.getItemPrice(), item.getItemQuantity()));
+            System.out.println(item.getItemName() + " has been added to your " + item.getItemCategory() + "'s list");
+        } else {
+            System.out.println("invalid entry");
+        }
+        viewAllItems();
     }
 
     @Override
@@ -144,18 +144,22 @@ public class ShoppingListManager implements Shopping {
 
     }
 
-    void shopNBud(){
+    void shopNBud() {
         System.out.println("---------- ⭐️----------");
         System.out.println(" S H O P ' N  🤖 B U D  ");
         System.out.println("---------- 🛒----------");
     }
 
     public void viewAllItems() {
-        for (Item item : items){
+        for (Item item : items) {
             item.displayItem();
         }
+        budgetSpend();
+        item.displayCategory();
+    }
+
+    void budgetSpend() {
         System.out.println("budget spend -> +$" + shoppingBudget + " | -$" +
                 (df.format(item.getItemPrice() * item.getItemQuantity())));
-        item.displayCategory();
     }
 }
