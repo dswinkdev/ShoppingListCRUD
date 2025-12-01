@@ -87,6 +87,19 @@ public class ShoppingListManager implements Shopping {
             shoppingBudget = 0;
             System.out.println("insufficient budget");
         } else {
+            if (shoppingBudget < 100){
+                System.out.println("- - - - - - - - - - - -");
+                System.out.println("FYI: your budget is under $100");
+                System.out.println("- - - - - - - - - - - -");
+            } else if (shoppingBudget < 200){
+                System.out.println("- - - - - - - - - - - -");
+                System.out.println("FYI: your budget is under $200");
+                System.out.println("- - - - - - - - - - - -");
+            } else if (shoppingBudget < 300){
+                System.out.println("- - - - - - - - - - - -");
+                System.out.println("FYI: your budget is under $300");
+                System.out.println("- - - - - - - - - - - -");
+            }
             shoppingBudget = shoppingBudget - (item.getItemPrice() * item.getItemQuantity());
         }
 
@@ -103,7 +116,10 @@ public class ShoppingListManager implements Shopping {
 
             if (addToCategory.equalsIgnoreCase("y") || addToCategory.equalsIgnoreCase("yes")) {
                 items.add(new Item(item.getItemName(), item.getItemPrice(), item.getItemQuantity()));
+                System.out.println("- - - - - - - - - - - -");
                 System.out.println(item.getItemName() + " has been added");
+                System.out.println("- - - - - - - - - - - -");
+
 
                 // add item to category
                 System.out.print("enter item category: ");

@@ -62,7 +62,7 @@ public class Item {
         System.out.println("est. total -> $" + df.format((itemPrice) * itemQuantity));
     }
     void displayCategory(){
-        System.out.println("category -> " + itemCategory);
+        System.out.println(((itemCategory == null) ? "category -> none" : "category -> " + itemCategory));
         System.out.println("- - - - - - - - - - - -");
     }
 }
