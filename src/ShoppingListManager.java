@@ -121,7 +121,6 @@ public class ShoppingListManager implements Shopping {
             System.out.println(item.getItemName() + " added");
             System.out.println("- - - - - - - - - - - -");
 
-
             // add item to category
             System.out.print("enter item category: ");
             item.setItemCategory(scanner.nextLine());
