@@ -24,14 +24,14 @@ public class Item {
 
     void displayItem() {
         System.out.println("- - - - - - - - - - - -");
-        System.out.println("item -> " + itemName);
-        System.out.println("price -> $" + df.format(itemPrice));
-        System.out.println("qty -> " + itemQuantity);
-        System.out.println("est. total -> $" + df.format((itemPrice) * itemQuantity));
+        System.out.println("⚡️item -> " + itemName);
+        System.out.println("🏷️price -> $" + df.format(itemPrice));
+        System.out.println("🛒qty -> " + itemQuantity);
+        System.out.println("💵est. total -> $" + df.format((itemPrice) * itemQuantity));
     }
 
     void displayCategory() {
-        System.out.println(((itemCategory == null) ? "category -> none" : "category -> " + itemCategory));
+        System.out.println(((itemCategory == null) ? "🧺category -> none" : "🧺️category -> " + itemCategory));
         System.out.println("- - - - - - - - - - - -");
     }
 

@@ -9,16 +9,21 @@ public class ShoppingListManager implements Shopping {
     double shoppingBudget = 0;
     int choice = 0;
     int itemCount = 0;
+    int totalQtyOfItems = 0;
+
+    // creates item object
+    Item item = new Item();
+
+    // scanner
+    Scanner scanner = new Scanner(System.in);
 
     // decimal format
     DecimalFormat df = new DecimalFormat("##.##");
 
-    Item item = new Item();
+    double itemToPurchaseTimesQty = item.getItemPrice() * (int) item.getItemQuantity();
 
     private ArrayList<Item> items;
     private ArrayList<Item> categories;
-
-    Scanner scanner = new Scanner(System.in);
 
     public ShoppingListManager() {
         this.items = new ArrayList<>();
@@ -43,8 +48,8 @@ public class ShoppingListManager implements Shopping {
         // users budget
         System.out.print("enter budget amount: $");
         shoppingBudget = scanner.nextDouble();
-        initialBudget = shoppingBudget;
         scanner.nextLine();
+        initialBudget = shoppingBudget;
 
         // user menu
         menu();
@@ -57,7 +62,7 @@ public class ShoppingListManager implements Shopping {
                 case 2 -> updateItem();
                 case 3 -> removeItem();
                 case 4 -> viewAllItems();
-                //case 5 -> viewAllCategories();
+                case 5 -> viewAllCategories();
                 case 9 -> {
                     System.out.println("exiting program");
                     running = false;
@@ -65,6 +70,8 @@ public class ShoppingListManager implements Shopping {
                 default -> System.out.println("invalid choice");
             }
         }
+        // close scanner
+        scanner.close();
     }
 
     @Override
@@ -83,26 +90,27 @@ public class ShoppingListManager implements Shopping {
         System.out.print("enter item quantity: ");
         item.setItemQuantity(scanner.nextInt());
         scanner.nextLine();
+        totalQtyOfItems = item.getItemQuantity();
 
         // budget calculation
-        if (shoppingBudget < 0 || shoppingBudget < (item.getItemPrice() * item.getItemQuantity())) {
+        if (shoppingBudget < 0 || shoppingBudget < itemToPurchaseTimesQty) {
             shoppingBudget = 0;
             System.out.println("insufficient budget");
         } else {
-            if (shoppingBudget < 100) {
+            if (shoppingBudget > 0 && shoppingBudget < 100) {
                 System.out.println("- - - - - - - - - - - -");
-                System.out.println("FYI: your budget is under $100");
+                System.out.println("⚠️FYI: your budget is under $100");
                 System.out.println("- - - - - - - - - - - -");
-            } else if (shoppingBudget < 200) {
+            } else if (shoppingBudget > 100 && shoppingBudget < 200) {
                 System.out.println("- - - - - - - - - - - -");
-                System.out.println("FYI: your budget is under $200");
+                System.out.println("⚠️FYI: your budget is under $200");
                 System.out.println("- - - - - - - - - - - -");
-            } else if (shoppingBudget < 300) {
+            } else if (shoppingBudget > 200 && shoppingBudget < 300) {
                 System.out.println("- - - - - - - - - - - -");
-                System.out.println("FYI: your budget is under $300");
+                System.out.println("⚠️FYI: your budget is under $300");
                 System.out.println("- - - - - - - - - - - -");
             }
-            shoppingBudget = shoppingBudget - (item.getItemPrice() * item.getItemQuantity());
+            shoppingBudget = shoppingBudget - itemToPurchaseTimesQty;
         }
 
         // count number of items
@@ -146,7 +154,7 @@ public class ShoppingListManager implements Shopping {
 
     void shopNBud() {
         System.out.println("---------- ⭐️----------");
-        System.out.println(" S H O P ' N  🤖 B U D  ");
+        System.out.println(" S H O P ' N  🤖 B U D ");
         System.out.println("---------- 🛒----------");
     }
 
@@ -158,9 +166,15 @@ public class ShoppingListManager implements Shopping {
         item.displayCategory();
     }
 
+    public void viewAllCategories() {
+        for (Item item : categories) {
+            item.displayCategory();
+        }
+    }
+
     void budgetSpend() {
-        System.out.println("budget amount: $" + initialBudget);
-        System.out.println("budget spent: -$" + (df.format(item.getItemPrice() * item.getItemQuantity())));
-        System.out.println("budget remaining: +$" + shoppingBudget);
+        System.out.println("🤑budget amount: $" + initialBudget);
+        System.out.println("☕️budget spent: -$" + itemToPurchaseTimesQty);
+        System.out.println("🚀budget remaining: +$" + shoppingBudget);
     }
 }
