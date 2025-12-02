@@ -90,7 +90,8 @@ public class ShoppingListManager implements Shopping {
         System.out.print("enter item quantity: ");
         item.setItemQuantity(scanner.nextInt());
         scanner.nextLine();
-        totalQtyOfAllItems = item.getItemQuantity();
+
+        totalQtyOfAllItems++;
 
         // budget calculation
         if (shoppingBudget < 0 || shoppingBudget < itemToPurchaseTimesQty) {
@@ -164,6 +165,8 @@ public class ShoppingListManager implements Shopping {
         }
         budgetSpend();
         item.displayCategory();
+        System.out.println("- - - - - - - - - - - -");
+        System.out.println("total qty: " + totalQtyOfAllItems);
     }
 
     public void viewAllCategories() {
