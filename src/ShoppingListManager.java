@@ -9,7 +9,7 @@ public class ShoppingListManager implements Shopping {
     double shoppingBudget = 0;
     int choice = 0;
     int itemCount = 0;
-    int totalQtyOfItems = 0;
+    int totalQtyOfAllItems = 0;
 
     // creates item object
     Item item = new Item();
@@ -90,7 +90,7 @@ public class ShoppingListManager implements Shopping {
         System.out.print("enter item quantity: ");
         item.setItemQuantity(scanner.nextInt());
         scanner.nextLine();
-        totalQtyOfItems = item.getItemQuantity();
+        totalQtyOfAllItems = item.getItemQuantity();
 
         // budget calculation
         if (shoppingBudget < 0 || shoppingBudget < itemToPurchaseTimesQty) {
