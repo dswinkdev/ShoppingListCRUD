@@ -91,6 +91,7 @@ public class ShoppingListManager implements Shopping {
         item.setItemQuantity(scanner.nextInt());
         scanner.nextLine();
 
+        // count number of items (quantity) added to list
         totalQtyOfAllItems++;
 
         // budget calculation
@@ -165,7 +166,6 @@ public class ShoppingListManager implements Shopping {
         }
         budgetSpend();
         item.displayCategory();
-        System.out.println("- - - - - - - - - - - -");
         System.out.println("total qty: " + totalQtyOfAllItems);
     }
 
